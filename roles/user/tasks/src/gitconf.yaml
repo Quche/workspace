@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    account: 'q'
+  tasks:
+
+  - name: Git email
+    git_config:
+      name: user.email
+      value: huchetq@gmail.com
+
+  - name: Git name
+    git_config:
+      name: user.name
+      value: QuentinHuchet

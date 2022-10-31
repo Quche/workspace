@@ -1,0 +1,19 @@
+---
+# APT management
+- name: Update the apt
+  apt:
+    update_cache=yes
+    force_apt_get=yes
+
+- name: Upgrade the apt
+  apt: upgrade=yes
+
+# APT packages
+- name: Install generic apt packages
+  apt:
+    pkg:
+      - curl
+      - git
+      - wget
+      - zsh
+      - make

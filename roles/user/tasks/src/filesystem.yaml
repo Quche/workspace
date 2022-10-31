@@ -1,0 +1,27 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+    account: 'q'
+  tasks:
+
+  - name: Creating additional folders
+    block:
+
+    - name: folder TEMP
+      ansible.builtin.file:
+        path: "/home/{{account}}/TEMP/"
+        state: directory
+      become_user: "{{account}}"
+
+    - name: folder GitHub
+      ansible.builtin.file:
+        path: "/home/{{account}}/Documents/GitHub"
+        state: directory
+      become_user: "{{account}}"
+
+    - name: folder Logiciels
+      ansible.builtin.file:
+        path: "/home/{{account}}/Logiciels"
+        state: directory
+      become_user: "{{account}}"

@@ -1,0 +1,57 @@
+---
+- hosts: localhost
+  vars:
+    account: 'q'
+  become_user: "{{account}}"
+
+  tasks:
+
+  # Terminator
+  - name: Terminator installation
+    apt:
+      pkg:
+      - terminator
+  - name: Terminator paths
+    file:
+      path: "/home/{{account}}/.config/terminator/plugins/"
+      state: directory
+      recurse: True
+  - name: Terminator-themes plugin
+    shell:
+      wget https://git.io/v5Zwz -O /home/{{account}}/.config/terminator/plugins/terminator-themes.py
+  - name: Terminator configfile
+    ansible.builtin.shell: |
+      cp -r ../config/terminator_config /home/{{account}}/.config/terminator/config
+
+  # CLIs: Gcloud and Kubectl
+  - name: kubectl
+    ansible.builtin.shell: |
+      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl \
+        -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+      chmod +x kubectl
+      sudo mv kubectl /usr/local/bin/kubectl
+  - name: gcloud
+    ansible.builtin.shell: |
+      echo "TODO"
+
+  # # OhMyZsh
+  # - name: Downloading OhMyZsh
+  #   ansible.builtin.uri:
+  #     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+  #     dest: /home/{{account}}/TEMP/
+  # - name: Deleting .oh-my-zsh present file
+  #   ansible.builtin.file:
+  #     path: /home/{{account}}/.oh-my-zsh
+  #     state: absent
+  # - name: Installing fresh version
+  #   ansible.builtin.shell: |
+  #     sh /home/{{account}}/TEMP/install.sh --keep-zshrc
+  # - name: Installing OhMyZsh deps
+  #   ansible.builtin.shell: |
+  #     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+  #       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  #     git clone https://github.com/zsh-users/zsh-autosuggestions \
+  #       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+  #   become_user: "{{account}}"
+  # - name: Set OhMyZsh as default shell
+  #   user: name="{{account}}" shell=/usr/bin/zsh
