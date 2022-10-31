@@ -1,0 +1,34 @@
+[global_config]
+  enabled_plugins = LaunchpadBugURLHandler, LaunchpadCodeURLHandler, APTURLHandler, TerminatorThemes
+  always_split_with_profile = True
+  title_use_system_font = False
+  title_font = MesloLGS NF 9
+[keybindings]
+[profiles]
+  [[default]]
+    cursor_color = "#aaaaaa"
+  [[Bim]]
+    background_color = "#012849"
+    cursor_color = "#c4d0de"
+    foreground_color = "#a9bed8"
+    palette = "#2c2423:#f557a0:#a9ee55:#f5a255:#5ea2ec:#a957ec:#5eeea0:#918988:#918988:#f579b2:#bbee78:#f5b378:#81b3ec:#bb79ec:#81eeb2:#f5eeec"
+[layouts]
+  [[default]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 222:401
+      maximised = False
+      fullscreen = False
+      size = 734, 450
+      title = quentin@quentin:~
+      last_active_term = 5ad9c97e-ab94-485f-9397-83449dad05ca
+      last_active_window = True
+    [[[terminal1]]]
+      type = Terminal
+      parent = child0
+      order = 0
+      profile = Bim
+      uuid = 5ad9c97e-ab94-485f-9397-83449dad05ca
+[plugins]
