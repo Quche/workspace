@@ -14,10 +14,18 @@ This repo regroups all my ubuntu configuration used for my personnal workspace. 
 - Create a SSH agent with [GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh)
 
 ## Run the playbook
+First, git clone this repo on your local machine:
+
 ```bash
-ansible-playbook ws_playbook.yaml -K
+git clone git@github.com:Quche/workspace.git
 ```
-A `BECOME password` is then asked, refer your Ubuntu user password. Now, let Ansible work for you ! 
+
+Go to the local clone and launch ansible:
+```bash
+ansible-playbook main.yaml -K
+```
+A `BECOME password` is then asked, refer your Ubuntu user password. Now, let Ansible work for you !
+
 
 
 
