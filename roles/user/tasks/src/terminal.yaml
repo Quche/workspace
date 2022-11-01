@@ -5,56 +5,76 @@
 # This list of tasks regroups all the operations related to
 # the terminal: terminator, zsh, oh-my-zsh and themes
 
-# # Terminator
-# - name: Terminator installation
-#   apt:
-#     pkg:
-#     - terminator
-# - name: Terminator paths
-#   file:
-#     path: "/home/{{account}}/.config/terminator/plugins/"
-#     state: directory
-#     recurse: True
-# - name: Terminator-themes plugin
-#   shell:
-#     wget https://git.io/v5Zwz -O /home/{{account}}/.config/terminator/plugins/terminator-themes.py
-# - name: Terminator configfile
-#   ansible.builtin.shell: |
-#     cp -r ../config/terminator_config /home/{{account}}/.config/terminator/config
+# APT installations
+- name: Terminal specific APT installation
+  apt:
+    pkg:
+    - zsh
+    - terminator
+  become_user: root
 
-  # CLIs: Gcloud and Kubectl
-  - name: kubectl
-    ansible.builtin.shell: |
-      curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl \
-        -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-      mv kubectl /home/{{username}}/TEMP/kubectl
-      chmod +x kubectl
-      sudo mv kubectl /usr/local/bin/kubectl
-  - name: gcloud
-    ansible.builtin.shell: |
-      echo "TODO"
+# Terminator
+- name: Terminator paths
+  file:
+    path: "/home/{{username}}/.config/terminator/plugins/"
+    state: directory
+    recurse: True
 
-# # OhMyZsh
-# - name: Downloading OhMyZsh
-#   ansible.builtin.get_url:
-#     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-#     dest: /home/{{username}}/TEMP/
+- name: Terminator-themes plugin
+  shell:
+    wget https://git.io/v5Zwz -O /home/{{username}}/.config/terminator/plugins/terminator-themes.py
 
-# - name: Deleting .oh-my-zsh present file
-#   ansible.builtin.file:
-#     path: /home/{{username}}/.oh-my-zsh
-#     state: absent
+- name: Terminator COPY configfile from repo
+  copy:
+    src: files/terminator_config
+    dest: /home/{{username}}/.config/terminator/config
 
-# - name: Installing fresh version
-#   ansible.builtin.shell: |
-#     sh /home/{{username}}/TEMP/install.sh --keep-zshrc
 
-# - name: Installing OhMyZsh deps
-#   ansible.builtin.shell: |
-#     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-#       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-#     git clone https://github.com/zsh-users/zsh-autosuggestions \
-#       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# OhMyZsh
+- name: Downloading OhMyZsh
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: /home/{{username}}/TEMP/
 
-# - name: Set OhMyZsh as default shell
-#   user: name="{{username}}" shell=/usr/bin/zsh
+- name: Deleting .oh-my-zsh present file
+  file:
+    path: /home/{{username}}/.oh-my-zsh
+    state: absent
+
+- name: Deleting .zshrc file if exist
+  file:
+    path: /home/{{username}}/.zshrc
+    state: absent
+
+- name: Copy .zshrc from the repo files to ~/.
+  copy:
+    src: files/.zshrc
+    dest: /home/{{username}}/.zshrc
+  become_user: "{{username}}"
+
+- name: Installing fresh version
+  ansible.builtin.shell: |
+    sh /home/{{username}}/TEMP/install.sh --keep-zshrc
+
+- name: Installing OhMyZsh deps
+  ansible.builtin.shell: |
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+      ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+    git clone https://github.com/zsh-users/zsh-autosuggestions \
+      ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+- name: Set OhMyZsh as default shell
+  user: name="{{username}}" shell=/usr/bin/zsh
+
+
+#   # # CLIs: Gcloud and Kubectl
+#   # - name: kubectl
+#   #   ansible.builtin.shell: |
+#   #     curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl \
+#   #       -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+#   #     mv kubectl /home/{{username}}/TEMP/kubectl
+#   #     chmod +x kubectl
+#   #     sudo mv kubectl /usr/local/bin/kubectl
+#   # - name: gcloud
+#   #   ansible.builtin.shell: |
+#   #     echo "TODO"

@@ -5,35 +5,40 @@
 # This list of tasks regroups all the operations related to
 # Julia and direct dependencies (ODBC, private registries, etc.)
 
+# Julia LTS 1.6
+- name: Downloading Julia LTS 1.6
+  ansible.builtin.unarchive:
+    src: https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.7-linux-x86_64.tar.gz
+    dest: /home/{{username}}/Logiciels/
+    remote_src: yes
 
-      # - name: Working environment
-      #   block:
+# ODBC Drivers (PostGres and MySQL)
+- name: apt deps
+  ansible.builtin.apt:
+    pkg:
+    - odbc-postgresql
+    - unixodbc
+  become_user: root
 
-      #   # Julia LTS 1.6
-      #   # - name : Julia
-      #   #   block:
-      #       # - name: Downloading Julia LTS 1.6
-      #       #   ansible.builtin.unarchive:
-      #       #     src: https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.7-linux-x86_64.tar.gz
-      #       #     dest: /home/{{account}}/Logiciels/Julia
-      #       #     remote_src: yes
-      #       # - name: Julia to path
-      #       #   ansible.builtin.shell: PATH=$PATH:/home/{{account}}/Logiciels/
+- name: Download MySQL mysql-connector-odbc
+  unarchive:
+    src: https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit.tar.gz
+    dest: /home/{{username}}/TEMP
+    remote_src: yes
 
-      #   # ODBC Drivers (PostGres and MySQL)
-      #   - name : ODBC drivers
-      #     block:
-      #       - name: apt deps
-      #         ansible.builtin.apt:
-      #           pkg:
-      #           - odbc-postgresql
-      #           - unixodbc
-      #       - name: MySQL wget driver
-      #         ansible.builtin.shell: |
-      #           wget https://dev.mysql.com/get/Downloads/Connector-ODBC/8.0/mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit.tar.gz
-      #           tar zxvf mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit.tar.gz
-      #           cp mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit/bin/* /usr/local/bin
-      #           cp mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit/lib/* /usr/local/lib
-      #           /usr/local/bin/myodbc-installer -a -d -n "MySQL ODBC 8.0 Driver" -t "Driver=/usr/local/lib/libmyodbc8w.so"
-      #           rm -rf mysql-connector-odbc*
-      #         become_user: "{{account}}"
+- name: Copy MySQL connectors to /usr/local/bin
+  copy:
+    src: /home/{{username}}/TEMP/mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit/bin/
+    dest: /usr/local/bin
+  become_user: root
+
+- name: Copy MySQL connectors to /usr/local/lib
+  copy:
+    src: /home/{{username}}/TEMP/mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit/lib/
+    dest: /usr/local/lib
+  become_user: root
+
+- name: Create MySQL connector `MySQL ODBC 8.0 Driver`
+  shell:
+    /usr/local/bin/myodbc-installer -a -d -n  "MySQL ODBC 8.0 Driver" -t "Driver=/usr/local/lib/libmyodbc8w.so"
+  become_user: root

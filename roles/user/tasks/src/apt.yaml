@@ -6,15 +6,14 @@
 # It is proceeded first on the global playbook.
 
 # APT management
-- name: Update the apt
+- name: Update the apt [ROOT]
   apt:
     upgrade=yes
     update_cache=yes
     force_apt_get=yes
-  become_user: root
 
 # APT packages
-- name: Install generic apt packages
+- name: Install generic apt packages [ROOT]
   apt:
     pkg:
       - curl
