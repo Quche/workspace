@@ -66,15 +66,22 @@
 - name: Set OhMyZsh as default shell
   user: name="{{username}}" shell=/usr/bin/zsh
 
+# Kubectl
+- name: Get Kubectl last stable version
+  uri:
+    url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
+    method: GET
+    return_content: yes
+  register: kubectl_version
 
-#   # # CLIs: Gcloud and Kubectl
-#   # - name: kubectl
-#   #   ansible.builtin.shell: |
-#   #     curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl \
-#   #       -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-#   #     mv kubectl /home/{{username}}/TEMP/kubectl
-#   #     chmod +x kubectl
-#   #     sudo mv kubectl /usr/local/bin/kubectl
-#   # - name: gcloud
-#   #   ansible.builtin.shell: |
-#   #     echo "TODO"
+- name: Download Kubectl last stable version
+  get_url:
+    url: https://storage.googleapis.com/kubernetes-release/release/{{kubectl_version.content}}/bin/linux/amd64/kubectl
+    dest: /home/{{username}}/TEMP/
+
+- name: Add kubectl to /usr/local/bin
+  copy:
+    src: /home/{{username}}/TEMP/kubectl
+    dest: /usr/local/bin/
+    mode: a+x
+  become_user: root
