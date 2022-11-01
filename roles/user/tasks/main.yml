@@ -1,20 +1,20 @@
 ---
 # APT generic installation: This updates, upgrades and install all generic linux apt deps.
-- name: APT generic installation
-  tags: apt_generic
-  ansible.builtin.import_tasks:
-    file: src/apt.yaml
-  become_user: root
+# - name: APT generic installation
+#   tags: apt_generic
+#   ansible.builtin.import_tasks:
+#     file: src/apt.yaml
+#   become_user: root
 
 # Adding specific additional directories for my personnal usage.
 - name: Additional directories
   tags: directories
   ansible.builtin.import_tasks: src/filesystem.yaml
 
-# Git configuration (email, names, .gitignore, etc.)
-- name: Git configuration
-  tags: git
-  ansible.builtin.import_tasks: src/gitconf.yaml
+# # Git configuration (email, names, .gitignore, etc.)
+# - name: Git configuration
+#   tags: git
+#   ansible.builtin.import_tasks: src/gitconf.yaml
 
 # Terminal installation and settings
 - name: Terminal installation and configuration
@@ -22,13 +22,13 @@
   ansible.builtin.import_tasks: src/terminal.yaml
 
 # Julia environment (LTS and ODBC drivers)
-- name: Julia environment
-  tags: julia
-  ansible.builtin.import_tasks: src/julia.yaml
+# - name: Julia environment
+#   tags: julia
+#   ansible.builtin.import_tasks: src/julia.yaml
 
-# Docker complete installation
-- name: Docker installation
-  tags: docker
-  ansible.builtin.import_tasks:
-    file: src/docker.yaml
-  become_user: root
+# # Docker complete installation
+# - name: Docker installation
+#   tags: docker
+#   ansible.builtin.import_tasks:
+#     file: src/docker.yaml
+#   become_user: root

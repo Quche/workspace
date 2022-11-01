@@ -34,7 +34,7 @@
 - name: Downloading OhMyZsh
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: /home/{{username}}/TEMP/
+    dest: "{{ TEMP_DIR.path }}"
 
 - name: Deleting .oh-my-zsh present file
   file:
@@ -54,7 +54,7 @@
 
 - name: Installing fresh version
   ansible.builtin.shell: |
-    sh /home/{{username}}/TEMP/install.sh --keep-zshrc
+    sh {{ TEMP_DIR.path }}/install.sh --keep-zshrc
 
 - name: Installing OhMyZsh deps
   ansible.builtin.shell: |
@@ -77,11 +77,11 @@
 - name: Download Kubectl last stable version
   get_url:
     url: https://storage.googleapis.com/kubernetes-release/release/{{kubectl_version.content}}/bin/linux/amd64/kubectl
-    dest: /home/{{username}}/TEMP/
+    dest: "{{ TEMP_DIR.path }}"
 
 - name: Add kubectl to /usr/local/bin
   copy:
-    src: /home/{{username}}/TEMP/kubectl
+    src: "{{ TEMP_DIR.path }}/kubectl"
     dest: /usr/local/bin/
     mode: a+x
   become_user: root

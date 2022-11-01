@@ -9,6 +9,11 @@
   ansible.builtin.file:
     path: "/home/{{username}}/TEMP/"
     state: directory
+  register: TEMP_DIR
+
+- name: debug
+  debug:
+    var: TEMP_DIR.path
 
 - name: folder GitHub
   ansible.builtin.file:
@@ -19,3 +24,10 @@
   ansible.builtin.file:
     path: "/home/{{username}}/Logiciels"
     state: directory
+  register: LOGICIEL_DIR
+
+- name: debug
+  debug:
+    var: LOGICIEL_DIR.path
+
+
