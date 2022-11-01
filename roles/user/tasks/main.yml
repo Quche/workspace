@@ -27,7 +27,8 @@
   ansible.builtin.import_tasks: src/julia.yaml
 
 # Docker complete installation
-# - name: Docker installation
-#   tags: docker
-#   ansible.builtin.import_tasks:
-#     file: src/docker.yaml
+- name: Docker installation
+  tags: docker
+  ansible.builtin.import_tasks:
+    file: src/docker.yaml
+  become_user: root

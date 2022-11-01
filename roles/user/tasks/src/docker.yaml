@@ -30,7 +30,6 @@
   ansible.builtin.apt:
     update_cache=yes
     force_apt_get=yes
-  become_user: root
 
 - name: Installing Docker
   ansible.builtin.apt:
@@ -45,7 +44,6 @@
     name: "{{username}}"
     groups: docker
     append: yes
-  become_user: root
 
 - name: reset ssh connection to allow user changes to affect ansible user
   ansible.builtin.meta:
@@ -55,4 +53,3 @@
   ansible.builtin.shell: |
     systemctl enable docker.service
     systemctl enable containerd.service
-  become_user: root
