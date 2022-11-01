@@ -1,7 +1,7 @@
 # APT generic installation: This updates, upgrades and install all generic linux apt deps.
 - hosts: localhost
   become: true
-  become_user: "{{username}}"
   vars_files: "vars/main.yml"
+
   roles:
     - user

@@ -1,27 +1,21 @@
 ---
-- hosts: localhost
-  become: yes
-  vars:
-    account: 'q'
-  tasks:
+# ------------------
+#     filesystem
+# ------------------
+# This list of tasks regroups all the operations related to
+# filesystem updates (add files, add specific user folders, etc).
 
-  - name: Creating additional folders
-    block:
+- name: folder TEMP
+  ansible.builtin.file:
+    path: "/home/{{username}}/TEMP/"
+    state: directory
 
-    - name: folder TEMP
-      ansible.builtin.file:
-        path: "/home/{{account}}/TEMP/"
-        state: directory
-      become_user: "{{account}}"
+- name: folder GitHub
+  ansible.builtin.file:
+    path: "/home/{{username}}/Documents/GitHub"
+    state: directory
 
-    - name: folder GitHub
-      ansible.builtin.file:
-        path: "/home/{{account}}/Documents/GitHub"
-        state: directory
-      become_user: "{{account}}"
-
-    - name: folder Logiciels
-      ansible.builtin.file:
-        path: "/home/{{account}}/Logiciels"
-        state: directory
-      become_user: "{{account}}"
+- name: folder Logiciels
+  ansible.builtin.file:
+    path: "/home/{{username}}/Logiciels"
+    state: directory

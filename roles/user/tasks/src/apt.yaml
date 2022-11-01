@@ -1,12 +1,17 @@
 ---
+# ------------------
+#     APT
+# ------------------
+# This list of tasks regroups all the operations related to APT management.
+# It is proceeded first on the global playbook.
+
 # APT management
 - name: Update the apt
   apt:
+    upgrade=yes
     update_cache=yes
     force_apt_get=yes
-
-- name: Upgrade the apt
-  apt: upgrade=yes
+  become_user: root
 
 # APT packages
 - name: Install generic apt packages

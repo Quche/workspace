@@ -6,16 +6,22 @@
     file: src/apt.yaml
 
 # Adding specific additional directories for my personnal usage.
-# - name: Additional directories
-#   tags: directories
-#   ansible.builtin.import_tasks: src/filesystem.yaml
+- name: Additional directories
+  tags: directories
+  ansible.builtin.import_tasks: src/filesystem.yaml
 
-# # Git configuration (email, names, .gitignore, etc.)
-# - name: Git configuration
-#   tags: git_conf
-#   ansible.builtin.import_tasks: src/gitconf.yaml
+# Git configuration (email, names, .gitignore, etc.)
+- name: Git configuration
+  tags: git_conf
+  ansible.builtin.import_tasks: src/gitconf.yaml
 
-# # Terminal installation and settings
-# - name: Terminal installation and configuration
-#   tags: terminal
-#   ansible.builtin.import_pimport_taskslaybook: src/terminal.yaml
+# Terminal installation and settings
+- name: Terminal installation and configuration
+  tags: terminal
+  ansible.builtin.import_tasks: src/terminal.yaml
+
+# APT generic installation: This updates, upgrades and install all generic linux apt deps.
+# - name: Docker installation
+#   tags: docker
+#   ansible.builtin.import_tasks:
+#     file: src/docker.yaml

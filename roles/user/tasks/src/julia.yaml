@@ -1,11 +1,10 @@
 ---
-# APT management
-- hosts: localhost
-  become: yes
-  vars:
-    account: 'q'
+# ------------------
+#     Julia
+# ------------------
+# This list of tasks regroups all the operations related to
+# Julia and direct dependencies (ODBC, private registries, etc.)
 
-  tasks:
 
       # - name: Working environment
       #   block:

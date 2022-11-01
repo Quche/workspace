@@ -1,16 +1,15 @@
 ---
-- hosts: localhost
-  become: yes
-  vars:
-    account: 'q'
-  tasks:
+# ------------------
+#     Git
+# ------------------
+# This list of tasks regroups all the operations related to git.
 
-  - name: Git email
-    git_config:
-      name: user.email
-      value: huchetq@gmail.com
+- name: Git email
+  git_config:
+    name: user.email
+    value: huchetq@gmail.com
 
-  - name: Git name
-    git_config:
-      name: user.name
-      value: QuentinHuchet
+- name: Git name
+  git_config:
+    name: user.name
+    value: QuentinHuchet
