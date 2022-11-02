@@ -5,20 +5,20 @@
 # This list of tasks regroups all the operations related to
 # Julia and direct dependencies (ODBC, private registries, etc.)
 
-# # Julia LTS 1.6
-# - name: Downloading Julia LTS 1.6
-#   ansible.builtin.unarchive:
-#     src: https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.7-linux-x86_64.tar.gz
-#     dest: "{{ LOGICIEL_DIR.path }}"
-#     remote_src: yes
+# Julia LTS 1.6
+- name: Downloading Julia LTS 1.6
+  ansible.builtin.unarchive:
+    src: https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.7-linux-x86_64.tar.gz
+    dest: "{{ LOGICIEL_DIR.path }}"
+    remote_src: yes
 
-# # ODBC Drivers (PostGres and MySQL)
-# - name: apt deps
-#   ansible.builtin.apt:
-#     pkg:
-#     - odbc-postgresql
-#     - unixodbc
-#   become_user: root
+# ODBC Drivers (PostGres and MySQL)
+- name: apt deps
+  ansible.builtin.apt:
+    pkg:
+    - odbc-postgresql
+    - unixodbc
+  become_user: root
 
 - name: Download MySQL mysql-connector-odbc
   unarchive:
