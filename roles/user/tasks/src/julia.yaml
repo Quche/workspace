@@ -36,6 +36,7 @@
   copy:
     src: "{{TEMP_DIR.path}}/mysql-connector-odbc-8.0.19-linux-glibc2.12-x86-64bit/lib/"
     dest: /usr/local/lib
+    mode: a+x
   become_user: root
 
 - name: Create MySQL connector `MySQL ODBC 8.0 Driver`
