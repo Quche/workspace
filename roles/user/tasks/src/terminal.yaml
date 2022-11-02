@@ -23,18 +23,18 @@
 # Terminator
 - name: Terminator paths
   file:
-    path: "/home/{{username}}/.config/terminator/plugins/"
+    path: "/home/{{ USERNAME }}/.config/terminator/plugins/"
     state: directory
     recurse: True
 
 - name: Terminator-themes plugin
   shell:
-    wget https://git.io/v5Zwz -O /home/{{username}}/.config/terminator/plugins/terminator-themes.py
+    wget https://git.io/v5Zwz -O /home/{{ USERNAME }}/.config/terminator/plugins/terminator-themes.py
 
 - name: Terminator COPY configfile from repo
   copy:
     src: "{{ TEMP_DIR.path }}/config/terminator"
-    dest: /home/{{ username }}/.config/terminator/config
+    dest: /home/{{ USERNAME }}/.config/terminator/config
 
 
 # OhMyZsh
@@ -45,19 +45,19 @@
 
 - name: Deleting .oh-my-zsh present file
   file:
-    path: /home/{{username}}/.oh-my-zsh
+    path: /home/{{ USERNAME }}/.oh-my-zsh
     state: absent
 
 - name: Deleting .zshrc file if exist
   file:
-    path: /home/{{username}}/.zshrc
+    path: /home/{{ USERNAME }}/.zshrc
     state: absent
 
 - name: Copy .zshrc from the repo files to ~/.
   copy:
     src: "{{ TEMP_DIR.path }}/config/zshrc"
-    dest: /home/{{username}}/.zshrc
-  become_user: "{{username}}"
+    dest: /home/{{ USERNAME }}/.zshrc
+  become_user: "{{ USERNAME }}"
 
 - name: Installing fresh version
   ansible.builtin.shell: |
@@ -71,7 +71,7 @@
       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 - name: Set OhMyZsh as default shell
-  user: name="{{username}}" shell=/usr/bin/zsh
+  user: name="{{ USERNAME }}" shell=/usr/bin/zsh
 
 # Kubectl
 - name: Get Kubectl last stable version

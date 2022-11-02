@@ -2,7 +2,7 @@
 - hosts: localhost
   vars_files: "vars/main.yml"
   become: true
-  become_user: "{{username}}"
+  become_user: "{{ USERNAME }}"
 
   roles:
     - user

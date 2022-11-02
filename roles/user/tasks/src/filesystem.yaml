@@ -7,7 +7,7 @@
 
 - name: folder TEMP
   ansible.builtin.file:
-    path: "/home/{{username}}/TEMP/"
+    path: "/home/{{ USERNAME }}/TEMP/"
     state: directory
   register: TEMP_DIR
 
@@ -17,12 +17,12 @@
 
 - name: folder GitHub
   ansible.builtin.file:
-    path: "/home/{{username}}/Documents/GitHub"
+    path: "/home/{{ USERNAME }}/Documents/GitHub"
     state: directory
 
 - name: folder Logiciels
   ansible.builtin.file:
-    path: "/home/{{username}}/Logiciels"
+    path: "/home/{{ USERNAME }}/Logiciels"
     state: directory
   register: LOGICIEL_DIR
 
