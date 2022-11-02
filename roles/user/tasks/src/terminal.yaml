@@ -13,6 +13,13 @@
     - terminator
   become_user: root
 
+# git clone my config repo
+- name: git clone the config repo
+  ansible.builtin.git:
+    repo: git@github.com:Quche/config.git
+    dest: "{{ TEMP_DIR.path }}/config"
+
+
 # Terminator
 - name: Terminator paths
   file:
@@ -26,8 +33,8 @@
 
 - name: Terminator COPY configfile from repo
   copy:
-    src: files/terminator_config
-    dest: /home/{{username}}/.config/terminator/config
+    src: "{{ TEMP_DIR.path }}/config/terminator"
+    dest: /home/{{ username }}/.config/terminator/config
 
 
 # OhMyZsh
@@ -48,7 +55,7 @@
 
 - name: Copy .zshrc from the repo files to ~/.
   copy:
-    src: files/.zshrc
+    src: "{{ TEMP_DIR.path }}/config/zshrc"
     dest: /home/{{username}}/.zshrc
   become_user: "{{username}}"
 
