@@ -16,6 +16,15 @@ This repo regroups all my ubuntu configuration used for my personnal workspace. 
 ## How it works: 
 Several tasks are sequentially proceeded to install my main components. Only 1 role is proposed (`user`) but this could be changed to several user for all applications. Everything stands on generic components and no additional informations are required but for terminal settings. In this specific list of task, configuration files are downloaded from private personnal repo. 
 
+## List of procedures/installations: 
+
+- APT update, upgrade
+- filesystem modification (add specific personnal paths)
+- Git (local parameters)
+- Terminal settings (ZSH, OhMyZSH, Terminator and CLI)
+- Julia LTS and ODBC related drivers
+- Docker
+
 ## Run the playbook
 First, git clone this repo on your local machine:
 
