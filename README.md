@@ -13,10 +13,10 @@ This repo regroups all my ubuntu configuration used for my personnal workspace. 
     ```
 - Create a SSH agent with [GitHub](https://docs.github.com/en/authentication/connecting-to-github-with-ssh/about-ssh)
 
-## How it works: 
-Several tasks are sequentially proceeded to install my main components. Only 1 role is proposed (`user`) but this could be changed to several user for all applications. Everything stands on generic components and no additional informations are required but for terminal settings. In this specific list of task, configuration files are downloaded from private personnal repo. 
+## How it works:
+Several tasks are sequentially proceeded to install my main components. Only 1 role is proposed (`user`) but this could be changed to several user for all applications. Everything stands on generic components and no additional informations are required but for terminal settings. In this specific list of task, configuration files are downloaded from private personnal repo.
 
-## List of procedures/installations: 
+## List of procedures/installations:
 
 - APT update, upgrade
 - filesystem modification (add specific personnal paths)

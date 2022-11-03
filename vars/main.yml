@@ -1,3 +1,6 @@
 ---
 # vars file for user
-USERNAME: 'q'
+USERNAME: 'quentin'
+
+# Folders to be created (from $HOME)
+TEMP_DIR: 'TEMP'
