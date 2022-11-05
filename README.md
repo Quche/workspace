@@ -26,6 +26,9 @@ Several tasks are sequentially proceeded to install my main components. Only 1 r
 - Docker
 
 ## Run the playbook
+
+### First installation
+
 First, git clone this repo on your local machine:
 
 ```bash
@@ -39,6 +42,12 @@ Go to the local clone and launch ansible:
 ansible-playbook main.yaml -K
 ```
 A `BECOME password` is then asked, refer your Ubuntu user password.
+
+### Specific update/installation
+Ansible allows to run only a part or a subpart of the project by using the `-t` parameter. All the operations have a `tag` which allows to be explicitely select the part of the deployment user want to play. 
+
+For example, if user want to only update terminal: 
+
 
 ## TODO
 - Compare this code with other approaches such as [this complete example](https://github.com/bradwilson/ansible-dev-pc).
