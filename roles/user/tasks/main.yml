@@ -12,9 +12,10 @@
   ansible.builtin.import_tasks: src/filesystem.yaml
 
 # Git configuration (email, names, .gitignore, etc.)
-# - name: Git configuration
-#   tags: git
-#   ansible.builtin.import_tasks: src/gitconf.yaml
+- name: Git configuration
+  tags: git
+  ansible.builtin.import_tasks: src/gitconf.yaml
+  become_user: root
 
 # Terminal installation and settings
 - name: Terminal installation and configuration
@@ -22,9 +23,9 @@
   ansible.builtin.import_tasks: src/terminal.yaml
 
 # Julia environment (LTS and ODBC drivers)
-# - name: Julia environment
-#   tags: julia
-#   ansible.builtin.import_tasks: src/julia.yaml
+- name: Julia environment
+  tags: julia
+  ansible.builtin.import_tasks: src/julia.yaml
 
 # Docker complete installation
 - name: Docker installation
