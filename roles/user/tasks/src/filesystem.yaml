@@ -18,7 +18,7 @@
 
 - name: folder Logiciels
   ansible.builtin.file:
-    path: "/home/{{ USERNAME }}/Logiciels"
+    path: "/home/{{ USERNAME }}/Documents/Logiciels"
     state: directory
   register: LOGICIEL_DIR
 
