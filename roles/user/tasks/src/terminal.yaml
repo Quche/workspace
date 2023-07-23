@@ -26,9 +26,10 @@
     state: directory
     recurse: True
 
-- name: Terminator-themes plugin
-  shell:
-    wget https://git.io/v5Zwz -O /home/{{ USERNAME }}/.config/terminator/plugins/terminator-themes.py
+- name: Download terminator-themes plugin
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/EliverLara/terminator-themes/master/plugin/older-version.py
+    dest: /home/{{ USERNAME }}/.config/terminator/plugins/terminator-themes.py
 
 - name: Terminator COPY configfile from repo
   copy:

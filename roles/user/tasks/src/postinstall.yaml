@@ -8,8 +8,3 @@
   ansible.builtin.file:
     path: "{{ TEMP_DIR.path }}"
     state: absent
-
-- name: clear wget-log files
-  ansible.builtin.file:
-    path: ./wget-log*
-    state: absent
