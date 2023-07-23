@@ -10,6 +10,7 @@
 - name: Additional directories
   tags: directories
   ansible.builtin.import_tasks: src/filesystem.yaml
+  when: true
 
 # Git configuration (email, names, .gitignore, etc.)
 - name: Git configuration

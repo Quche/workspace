@@ -9,14 +9,14 @@
 - name: Downloading Julia LTS 1.6
   ansible.builtin.unarchive:
     src: https://julialang-s3.julialang.org/bin/linux/x64/1.6/julia-1.6.7-linux-x86_64.tar.gz
-    dest: "{{ LOGICIEL_DIR.path }}"
+    dest: "{{ LOGICIEL_DIR }}"
     remote_src: yes
 
 # Julia 1.9
 - name: Downloading Julia 1.9
   ansible.builtin.unarchive:
     src: https://julialang-s3.julialang.org/bin/linux/x64/1.9/julia-1.9.1-linux-x86_64.tar.gz
-    dest: "{{ LOGICIEL_DIR.path }}"
+    dest: "{{ LOGICIEL_DIR }}"
     remote_src: yes
 
 
@@ -24,8 +24,8 @@
   ansible.builtin.blockinfile:
     dest: "~/.zshrc"
     block: |
-      alias julia16={{ LOGICIEL_DIR.path }}/julia-1.6.7/bin/julia
-      alias julia19={{ LOGICIEL_DIR.path }}/julia-1.9.1/bin/julia
+      alias julia16={{ LOGICIEL_DIR }}/julia-1.6.7/bin/julia
+      alias julia19={{ LOGICIEL_DIR }}/julia-1.9.1/bin/julia
     marker: '# {mark} ANSIBLE MANAGED BLOCK - julia'
     insertbefore: BOF
     create: yes

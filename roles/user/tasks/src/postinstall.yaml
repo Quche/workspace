@@ -6,5 +6,5 @@
 
 - name: Clear installation files
   ansible.builtin.file:
-    path: "{{ TEMP_DIR.path }}"
+    path: "{{ TEMP_DIR }}"
     state: absent
