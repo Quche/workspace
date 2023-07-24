@@ -1,0 +1,14 @@
+---
+# ------------------
+#     npm
+# ------------------
+# This list of tasks regroups all the operations related to npm installation
+
+- name : Install NodeJS 18 PPA
+  ansible.builtin.shell:
+    curl -s https://deb.nodesource.com/setup_18.x | sudo bash
+
+- name: Install nodejs & npm dependencies
+  ansible.builtin.apt:
+    pkg:
+    - nodejs

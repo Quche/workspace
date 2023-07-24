@@ -35,6 +35,12 @@
     file: src/docker.yaml
   become_user: root
 
+# NPM installation
+- name: NodeJS & NPM installation
+  tags: nodejs_npm
+  ansible.builtin.import_tasks: src/nodejs_npm.yaml
+  become_user: root
+
 # Post installation cleaning
 - name: Post installation cleaning
   tags: postinstall
