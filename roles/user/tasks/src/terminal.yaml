@@ -71,7 +71,9 @@
       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 - name: Set OhMyZsh as default shell
-  user: name="{{ USERNAME }}" shell=/usr/bin/zsh
+  ansible.builtin.shell: |
+    chsh -s $(which zsh) {{ USERNAME }}
+  become_user: root
 
 # Kubectl
 - name: Get Kubectl last stable version
