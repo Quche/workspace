@@ -47,6 +47,8 @@ A `BECOME password` is then asked, refer your Ubuntu user password.
 - Compare this code with other approaches such as [this complete example](https://github.com/bradwilson/ansible-dev-pc).
 - Separate all the specific operations into roles.
 - Export DIR variables globally to use the subpart playbook running (`-t` parameter).
+- mysql, psql
+- gcloud
 
 
 
