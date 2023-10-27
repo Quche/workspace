@@ -1,0 +1,17 @@
+---
+# ------------------
+#     DB clients
+# ------------------
+# MySQL and Postgres clients
+
+# MySQL
+- name: MySQL server
+  apt:
+    pkg:
+      - mysql-server
+
+# Postgres
+- name: postgresql
+  apt:
+    pkg:
+      - postgresql

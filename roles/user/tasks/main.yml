@@ -41,6 +41,12 @@
   ansible.builtin.import_tasks: src/nodejs_npm.yaml
   become_user: root
 
+# Database Clients installation
+- name: MySQL and Postgres clients
+  tags: db_clients
+  ansible.builtin.import_tasks: src/db_client.yaml
+  become_user: root
+
 # Post installation cleaning
 - name: Post installation cleaning
   tags: postinstall
