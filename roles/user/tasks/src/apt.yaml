@@ -21,3 +21,4 @@
       - wget
       - zsh
       - make
+      - pipx

@@ -13,84 +13,78 @@
     - terminator
   become_user: root
 
-# git clone my config repo
-- name: git clone the config repo
-  ansible.builtin.git:
-    repo: git@github.com:Quche/config.git
-    dest: "{{ TEMP_DIR }}/config"
+# # Terminator
+# - name: Terminator paths
+#   file:
+#     path: /home/{{ USERNAME }}/.config/terminator/plugins/
+#     state: directory
+#     recurse: True
 
-# Terminator
-- name: Terminator paths
-  file:
-    path: /home/{{ USERNAME }}/.config/terminator/plugins/
-    state: directory
-    recurse: True
+# - name: Download terminator-themes plugin
+#   ansible.builtin.get_url:
+#     url: https://raw.githubusercontent.com/EliverLara/terminator-themes/master/plugin/older-version.py
+#     dest: /home/{{ USERNAME }}/.config/terminator/plugins/terminator-themes.py
 
-- name: Download terminator-themes plugin
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/EliverLara/terminator-themes/master/plugin/older-version.py
-    dest: /home/{{ USERNAME }}/.config/terminator/plugins/terminator-themes.py
-
-- name: Terminator COPY configfile from repo
-  copy:
-    src: "{{ TEMP_DIR }}/config/terminator"
-    dest: /home/{{ USERNAME }}/.config/terminator/config
+# - name: Terminator COPY configfile from repo
+#   copy:
+#     src: "{{ TEMP_DIR }}/config/terminator"
+#     dest: /home/{{ USERNAME }}/.config/terminator/config
 
 
-# OhMyZsh
-- name: Downloading OhMyZsh
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
-    dest: "{{ TEMP_DIR }}"
+# # OhMyZsh
+# - name: Downloading OhMyZsh
+#   ansible.builtin.get_url:
+#     url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+#     dest: "{{ TEMP_DIR }}"
 
-- name: Deleting .oh-my-zsh present file
-  file:
-    path: /home/{{ USERNAME }}/.oh-my-zsh
-    state: absent
+# - name: Deleting .oh-my-zsh present file
+#   file:
+#     path: /home/{{ USERNAME }}/.oh-my-zsh
+#     state: absent
 
-- name: Deleting .zshrc file if exist
-  file:
-    path: /home/{{ USERNAME }}/.zshrc
-    state: absent
+# - name: Deleting .zshrc file if exist
+#   file:
+#     path: /home/{{ USERNAME }}/.zshrc
+#     state: absent
 
-- name: Copy .zshrc from the repo files to ~/.
-  copy:
-    src: "{{ TEMP_DIR }}/config/zshrc"
-    dest: /home/{{ USERNAME }}/.zshrc
-  become_user: "{{ USERNAME }}"
+# - name: Copy .zshrc from the repo files to ~/.
+#   copy:
+#     src: "{{ TEMP_DIR }}/config/zshrc"
+#     dest: /home/{{ USERNAME }}/.zshrc
+#   become_user: "{{ USERNAME }}"
 
-- name: Installing fresh version
-  ansible.builtin.shell: |
-    sh {{ TEMP_DIR }}/install.sh --keep-zshrc
+# - name: Installing fresh version
+#   ansible.builtin.shell: |
+#     sh {{ TEMP_DIR }}/install.sh --keep-zshrc
 
-- name: Installing OhMyZsh deps
-  ansible.builtin.shell: |
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
-      ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-    git clone https://github.com/zsh-users/zsh-autosuggestions \
-      ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+# - name: Installing OhMyZsh deps
+#   ansible.builtin.shell: |
+#     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git \
+#       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+#     git clone https://github.com/zsh-users/zsh-autosuggestions \
+#       ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
-- name: Set OhMyZsh as default shell
-  ansible.builtin.shell: |
-    chsh -s $(which zsh) {{ USERNAME }}
-  become_user: root
+# - name: Set OhMyZsh as default shell
+#   ansible.builtin.shell: |
+#     chsh -s $(which zsh) {{ USERNAME }}
+#   become_user: root
 
-# Kubectl
-- name: Get Kubectl last stable version
-  uri:
-    url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
-    method: GET
-    return_content: yes
-  register: kubectl_version
+# # Kubectl
+# - name: Get Kubectl last stable version
+#   uri:
+#     url: https://storage.googleapis.com/kubernetes-release/release/stable.txt
+#     method: GET
+#     return_content: yes
+#   register: kubectl_version
 
-- name: Download Kubectl last stable version
-  get_url:
-    url: https://storage.googleapis.com/kubernetes-release/release/{{kubectl_version.content}}/bin/linux/amd64/kubectl
-    dest: "{{ TEMP_DIR }}"
+# - name: Download Kubectl last stable version
+#   get_url:
+#     url: https://storage.googleapis.com/kubernetes-release/release/{{kubectl_version.content}}/bin/linux/amd64/kubectl
+#     dest: "{{ TEMP_DIR }}"
 
-- name: Add kubectl to /usr/local/bin
-  copy:
-    src: "{{ TEMP_DIR }}/kubectl"
-    dest: /usr/local/bin/
-    mode: a+x
-  become_user: root
+# - name: Add kubectl to /usr/local/bin
+#   copy:
+#     src: "{{ TEMP_DIR }}/kubectl"
+#     dest: /usr/local/bin/
+#     mode: a+x
+#   become_user: root

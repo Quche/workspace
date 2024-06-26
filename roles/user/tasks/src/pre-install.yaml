@@ -1,0 +1,13 @@
+- name: create paths for GitHub, Logiciels and TEMP
+  set_fact:
+    USER_GITHUB_DIR: "/home/{{ ansible_env.USER }}/Documents/GitHub"
+    USER_LOGICIEL_DIR: "/home/{{ ansible_env.USER }}/Logiciels"
+    USER_TEMP_DIR: "/home/{{ ansible_env.USER }}/TEMP"
+    USER_ROOT_DIR: "/home/{{ ansible_env.USER }}"
+
+# git clone my config repo
+- name: git clone the config repo
+  ansible.builtin.git:
+    repo: git@github.com:Quche/config.git
+    dest: "{{ USER_TEMP_DIR }}/config"
+    key_file: /home/{{ ansible_env.USER }}/.ssh/id_ed25519
