@@ -7,16 +7,16 @@
 
 - name: folder TEMP
   ansible.builtin.file:
-    path: "{{ TEMP_DIR }}"
+    path: "{{ USER_TEMP_DIR }}"
     state: directory
 
 - name: folder GitHub
   ansible.builtin.file:
-    path: "{{ GITHUB_DIR }}"
+    path: "{{ USER_GITHUB_DIR }}"
     state: directory
 
 - name: folder Logiciels
   ansible.builtin.file:
-    path: "{{ LOGICIEL_DIR }}"
+    path: "{{ USER_LOGICIEL_DIR }}"
     state: directory
 

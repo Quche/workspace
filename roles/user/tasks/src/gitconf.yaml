@@ -4,6 +4,17 @@
 # ------------------
 # This list of tasks regroups all the operations related to git.
 
+- name: ~/.config/git/ directory
+  file:
+    path: "{{ USER_ROOT_DIR }}/.config/git/"
+    state: directory
+    recurse: True
+
+- name: Copy global .gitgnore to ~/.
+  copy:
+    src: "{{ USER_TEMP_DIR }}/config/.gitignore"
+    dest: "{{ USER_ROOT_DIR }}/.config/git/.gitignore"
+
 - name: Git email
   git_config:
     name: user.email
@@ -13,3 +24,8 @@
   git_config:
     name: user.name
     value: QuentinHuchet
+
+- name: Global gitignore
+  git_config:
+    name: core.excludesfiles
+    value: "{{ USER_ROOT_DIR }}/.config/git/.gitignore"

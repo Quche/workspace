@@ -1,8 +1,8 @@
----
-# vars file for user
-USERNAME: 'quentin'
+# ---
+# # vars file for user
+# USERNAME: 'quentin'
 
-# Folders to be created (from $HOME)
-TEMP_DIR: "/home/{{ USERNAME }}/TEMP"
-LOGICIEL_DIR: "/home/{{ USERNAME }}/Documents/Logiciels"
-GITHUB_DIR: "/home/{{ USERNAME }}/Documents/GitHub"
+# # Folders to be created (from $HOME)
+# TEMP_DIR: "/home/{{ USERNAME }}/TEMP"
+# LOGICIEL_DIR: "/home/{{ USERNAME }}/Documents/Logiciels"
+# GITHUB_DIR: "/home/{{ USERNAME }}/Documents/GitHub"
