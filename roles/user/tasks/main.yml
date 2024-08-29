@@ -6,34 +6,29 @@
     file: src/pre-install.yaml
   become_user: root
 
-# APT generic installation: This updates, upgrades and install all generic linux apt deps.
-- name: APT generic installation
-  tags: apt_generic
-  ansible.builtin.import_tasks:
-    file: src/apt.yaml
-  become_user: root
+# # APT generic installation: This updates, upgrades and install all generic linux apt deps.
+# - name: APT generic installation
+#   tags: apt_generic
+#   ansible.builtin.import_tasks:
+#     file: src/apt.yaml
+#   become_user: root
 
 # Adding specific additional directories for my personnal usage.
 - name: Additional directories
   tags: directories
-  ansible.builtin.import_tasks: src/filesystem.yaml
-  when: true
+  ansible.builtin.import_tasks:
+    file: src/filesystem.yaml
 
-# Git configuration (email, names, .gitignore, etc.)
-- name: Git configuration
-  tags: git
-  ansible.builtin.import_tasks: src/gitconf.yaml
+# # Git configuration (email, names, .gitignore, etc.)
+# - name: Git configuration
+#   tags: git
+#   ansible.builtin.import_tasks: src/gitconf.yaml
+#   become_user: root
 
-# Terminal installation and settings
-- name: Terminal installation and configuration
-  tags: terminal
-  become_user: root
-  ansible.builtin.import_tasks: src/terminal.yaml
-
-# Julia environment (LTS and ODBC drivers)
-- name: Julia environment
-  tags: julia
-  ansible.builtin.import_tasks: src/julia.yaml
+# # Terminal installation and settings
+# - name: Terminal installation and configuration
+#   tags: terminal
+#   ansible.builtin.import_tasks: src/terminal.yaml
 
 # Docker complete installation
 - name: Docker installation
@@ -42,19 +37,19 @@
     file: src/docker.yaml
   become_user: root
 
-# NPM installation
-- name: NodeJS & NPM installation
-  tags: nodejs_npm
-  ansible.builtin.import_tasks: src/nodejs_npm.yaml
-  become_user: root
+# # NPM installation
+# - name: NodeJS & NPM installation
+#   tags: nodejs_npm
+#   ansible.builtin.import_tasks: src/nodejs_npm.yaml
+#   become_user: root
 
-# Database Clients installation
-- name: MySQL and Postgres clients
-  tags: db_clients
-  ansible.builtin.import_tasks: src/db_client.yaml
-  become_user: root
+# # Database Clients installation
+# - name: MySQL and Postgres clients
+#   tags: db_clients
+#   ansible.builtin.import_tasks: src/db_client.yaml
+#   become_user: root
 
-# Post installation cleaning
-- name: Post installation cleaning
-  tags: postinstall
-  ansible.builtin.import_tasks: src/postinstall.yaml
+# # Post installation cleaning
+# - name: Post installation cleaning
+#   tags: postinstall
+#   ansible.builtin.import_tasks: src/postinstall.yaml

@@ -14,9 +14,3 @@
   ansible.builtin.file:
     path: "{{ USER_GITHUB_DIR }}"
     state: directory
-
-- name: folder Logiciels
-  ansible.builtin.file:
-    path: "{{ USER_LOGICIEL_DIR }}"
-    state: directory
-
